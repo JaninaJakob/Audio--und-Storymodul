@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Bubble mit Strahlen</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #d3d3d3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .canvas {
+      position: relative;
+      width: 900px;
+      height: 550px;
+      background: #ffffff;
+      border: 2px solid #aaa;
+    }
+
+    /* Bubble */
+    .voice-bubble {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #000000;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 3s ease-in-out infinite;
+      overflow: visible; /* wichtig für Strahlen nach außen */
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    /* kleines Icon in der Mitte (optional) */
+    .voice-bubble::before {
+      content: "";
+      width: 32px;
+      height: 24px;
+      background: #ffffff;
+      box-shadow:
+        -12px 0 0 0 #ffffff,
+        -6px  0 0 0 #ffffff,
+         6px  0 0 0 #ffffff,
+        12px  0 0 0 #ffffff;
+      mask-image: linear-gradient(to top, transparent 0, #000 15%, #000 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to top, transparent 0, #000 15%, #000 85%, transparent 100%);
+    }
+
+    /* === STRAHLEN NACH AUSSEN WENN SPIELT === */
+    .voice-bubble.playing::after {
+      content: "";
+      position: absolute;
+      inset: -45px;              /* wie weit die Strahlen rausgehen */
+      border-radius: 50%;
+      pointer-events: none;
+
+      /* erzeugt Strahlen */
+      background:
+        repeating-conic-gradient(
+          from 0deg,
+          #000 0deg 4deg,       /* Strahl */
+          transparent 4deg 10deg
+        );
+
+      /* Mitte ausstanzen, damit Strahlen außen beginnen */
+      mask-image: radial-gradient(circle,
+        transparent 0 45%,      /* innen frei */
+        #000 50% 100%           /* außen sichtbar */
+      );
+      -webkit-mask-image: radial-gradient(circle,
+        transparent 0 45%,
+        #000 50% 100%
+      );
+
+      animation: rays-spin 1.2s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes rays-spin {
+      0%   { transform: rotate(0deg)   scale(1); }
+      50%  { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Test-Position einer Bubble */
+    .b1 {
+      top: 80px;
+      left: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Test-Bubble -->
+    <button class="voice-bubble b1" data-audio="audio1"></button>
+
+    <!-- Test-Audio -->
+    <audio id="audio1" src="audio1.mp3"></audio>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const bubbles = document.querySelectorAll(".voice-bubble");
+      const audios = Array.from(document.querySelectorAll("audio"));
+
+      function stopAll() {
+        audios.forEach(a => {
+          a.pause();
+          a.currentTime = 0;
+        });
+        bubbles.forEach(b => b.classList.remove("playing"));
+      }
+
+      bubbles.forEach(bubble => {
+        bubble.addEventListener("click", () => {
+          const audioId = bubble.dataset.audio;
+          const audio = document.getElementById(audioId);
+          if (!audio) {
+            console.error("Kein Audio mit id:", audioId);
+            return;
+          }
+
+          const wasPlaying = bubble.classList.contains("playing");
+          stopAll();
+
+          if (!wasPlaying) {
+            audio.play()
+              .then(() => {
+                bubble.classList.add("playing");
+              })
+              .catch(err => {
+                console.error("Audio Fehler:", err);
+              });
+          }
+        });
+      });
+
+      audios.forEach(audio => {
+        audio.addEventListener("ended", () => {
+          const bubble = document.querySelector(
+            `.voice-bubble[data-audio="${audio.id}"]`
+          );
+          if (bubble) bubble.classList.remove("playing");
+        });
+      });
+    });
+  </script>
+</body>
+</html>
