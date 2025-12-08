@@ -1,3 +1,17 @@
+.canvas {
+  background: #000;
+  overflow: visible;
+}
+
+.video-wrapper {
+  z-index: 10;
+}
+
+.voice-bubble {
+  z-index: 20;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
