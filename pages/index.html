@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voice Orbit Demo</title>
 
-  <!-- CSS und JS liegen im selben Ordner -->
+  <!-- Liegt im selben Ordner wie index.html -->
   <link rel="stylesheet" href="styles.css">
+  <!-- defer, damit das DOM zuerst geladen wird -->
   <script src="main.js" defer></script>
 </head>
 
@@ -18,7 +19,7 @@
       <div class="video-box">
         <video
           id="leftVideo"
-          src="covers/janina.mp4"
+          src="janina.mp4"
           preload="metadata"
           controls
           playsinline>
@@ -28,7 +29,7 @@
       <div class="video-box">
         <video
           id="rightVideo"
-          src="covers/janina.mp4"
+          src="janina.mp4"
           preload="metadata"
           controls
           playsinline>
@@ -50,20 +51,21 @@
     <button class="voice-bubble b-bottom-2" data-audio="audio9"></button>
     <button class="voice-bubble b-bottom-3" data-audio="audio10"></button>
 
-    <!-- AUDIOS -->
-    <audio id="audio1"  src="sounds/audio_1.wav" preload="auto"></audio>
-    <audio id="audio2"  src="sounds/audio_2.wav" preload="auto"></audio>
-    <audio id="audio3"  src="sounds/audio_3.wav" preload="auto"></audio>
-    <audio id="audio4"  src="sounds/audio_4.wav" preload="auto"></audio>
-    <audio id="audio5"  src="sounds/audio_5.wav" preload="auto"></audio>
-    <audio id="audio6"  src="sounds/audio_6.wav" preload="auto"></audio>
-    <audio id="audio7"  src="sounds/audio_7.wav" preload="auto"></audio>
-    <audio id="audio8"  src="sounds/audio_8.wav" preload="auto"></audio>
-    <audio id="audio9"  src="sounds/audio_9.wav" preload="auto"></audio>
-    <audio id="audio10" src="sounds/audio_10.wav" preload="auto"></audio>
+    <!-- AUDIOS – liegen ebenfalls direkt im selben Ordner -->
+    <audio id="audio1"  src="audio_1.wav" preload="auto"></audio>
+    <audio id="audio2"  src="audio_2.wav" preload="auto"></audio>
+    <audio id="audio3"  src="audio_3.wav" preload="auto"></audio>
+    <audio id="audio4"  src="audio_4.wav" preload="auto"></audio>
+    <audio id="audio5"  src="audio_5.wav" preload="auto"></audio>
+    <audio id="audio6"  src="audio_6.wav" preload="auto"></audio>
+    <audio id="audio7"  src="audio_7.wav" preload="auto"></audio>
+    <audio id="audio8"  src="audio_8.wav" preload="auto"></audio>
+    <audio id="audio9"  src="audio_9.wav" preload="auto"></audio>
+    <audio id="audio10" src="audio_10.wav" preload="auto"></audio>
 
   </div>
 </body>
 </html>
+
 
 
