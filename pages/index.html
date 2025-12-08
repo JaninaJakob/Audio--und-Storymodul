@@ -5,36 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voice Orbit Demo</title>
 
+  <!-- CSS und JS liegen im selben Ordner -->
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js"></script>
-
+  <script src="main.js" defer></script>
 </head>
 
 <body>
   <div class="canvas">
 
-    <!-- Video-Bereich -->
+    <!-- VIDEOS -->
     <div class="video-wrapper">
-      <!-- LINKES VIDEO -->
       <div class="video-box">
         <video
-          id="rightVideo"
+          id="leftVideo"
           src="covers/janina.mp4"
-          preload="metadata">
+          preload="metadata"
+          controls
+          playsinline>
         </video>
       </div>
 
-      <!-- RECHTES VIDEO -->
       <div class="video-box">
         <video
           id="rightVideo"
           src="covers/janina.mp4"
-          preload="metadata">
+          preload="metadata"
+          controls
+          playsinline>
         </video>
       </div>
     </div>
 
-    <!-- Voice-Bubbles -->
+    <!-- VOICE BUBBLES -->
     <button class="voice-bubble b-top-1"    data-audio="audio1"></button>
     <button class="voice-bubble b-top-2"    data-audio="audio2"></button>
     <button class="voice-bubble b-top-3"    data-audio="audio3"></button>
@@ -48,18 +50,20 @@
     <button class="voice-bubble b-bottom-2" data-audio="audio9"></button>
     <button class="voice-bubble b-bottom-3" data-audio="audio10"></button>
 
-    <!-- Audios -->
-    <audio id="audio1" src="sounds/audio_1.wav"></audio>
-    <audio id="audio2" src="sounds/audio_2.wav"></audio>
-    <audio id="audio3" src="sounds/audio_3.wav"></audio>
-    <audio id="audio4" src="sounds/audio_4.wav"></audio>
-    <audio id="audio5" src="sounds/audio_5.wav"></audio>
-    <audio id="audio6" src="sounds/audio_6.wav"></audio>
-    <audio id="audio7" src="sounds/audio_7.wav"></audio>
-    <audio id="audio8" src="sounds/audio_8.wav"></audio>
-    <audio id="audio9" src="sounds/audio_9.wav"></audio>
-    <audio id="audio10" src="sounds/audio_10.wav"></audio>
+    <!-- AUDIOS -->
+    <audio id="audio1"  src="sounds/audio_1.wav" preload="auto"></audio>
+    <audio id="audio2"  src="sounds/audio_2.wav" preload="auto"></audio>
+    <audio id="audio3"  src="sounds/audio_3.wav" preload="auto"></audio>
+    <audio id="audio4"  src="sounds/audio_4.wav" preload="auto"></audio>
+    <audio id="audio5"  src="sounds/audio_5.wav" preload="auto"></audio>
+    <audio id="audio6"  src="sounds/audio_6.wav" preload="auto"></audio>
+    <audio id="audio7"  src="sounds/audio_7.wav" preload="auto"></audio>
+    <audio id="audio8"  src="sounds/audio_8.wav" preload="auto"></audio>
+    <audio id="audio9"  src="sounds/audio_9.wav" preload="auto"></audio>
+    <audio id="audio10" src="sounds/audio_10.wav" preload="auto"></audio>
 
   </div>
 </body>
 </html>
+
+
