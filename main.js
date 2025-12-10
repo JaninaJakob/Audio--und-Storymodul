@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let originalParent = null;
   let originalNextSibling = null;
 
+  // NEU: Standardmaessig keine Controls (also keine Zeitdauer im kleinen Bild)
+  videos.forEach(v => {
+    v.controls = false;
+  });
+
   videos.forEach(video => {
     video.addEventListener("click", () => {
 
@@ -68,6 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Video aus Layout loesen
         document.body.appendChild(video);
         video.classList.add("video-fullscreen");
+
+        // NEU: im Fullscreen Controls anzeigen (damit auch Zeit unten sichtbar)
+        video.controls = true;
 
         video.muted = false;
         video.volume = 1;
@@ -91,6 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
     activeVideo.currentTime = 0;
     activeVideo.classList.remove("video-fullscreen");
 
+    // NEU: beim Verkleinern Controls wieder deaktivieren
+    activeVideo.controls = false;
+
     if (originalNextSibling) {
       originalParent.insertBefore(activeVideo, originalNextSibling);
     } else {
@@ -111,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
       activeVideo.currentTime = 0;
       activeVideo.classList.remove("video-fullscreen");
 
+      // NEU: altes Video wieder ohne Controls
+      activeVideo.controls = false;
+
       if (originalNextSibling) {
         originalParent.insertBefore(activeVideo, originalNextSibling);
       } else {
@@ -130,12 +144,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(newVideo);
     newVideo.classList.add("video-fullscreen");
 
+    // NEU: neues Fullscreen-Video mit Controls (Zeit sichtbar)
+    newVideo.controls = true;
+
     newVideo.muted = false;
     newVideo.volume = 1;
     newVideo.play();
   }
 
 });
+
 
 
 
